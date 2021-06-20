@@ -1,3 +1,4 @@
+"use strict";
 /* Задания на урок:
 
 1) Удалить все рекламные блоки со страницы (правая часть сайта)
@@ -12,11 +13,9 @@
 
 5) Добавить нумерацию выведенных фильмов */
 
-'use strict';
-
 const movieDB = {
     movies: [
-        "Логан",
+        "ЯЛоган",
         "Лига справедливости",
         "Ла-ла лэнд",
         "Одержимость",
@@ -24,3 +23,25 @@ const movieDB = {
     ]
 };
 
+const reklama = document.querySelectorAll('.promo__adv'),
+        poster = document.querySelector('.promo__bg'),
+        zhanr = poster.querySelector('.promo__genre'),
+        list = document.querySelector('.promo__interactive-list');
+
+
+reklama.forEach(item => {
+    item.remove();
+});
+
+zhanr.textContent = 'ДРАМА';
+poster.style.backgroundImage = 'url("img/bg.jpg")';
+
+list.innerHTML = "";
+movieDB.movies.sort(); 
+movieDB.movies.forEach((film, i) => {
+    list.innerHTML += `
+        <li class="promo__interactive-item">${i + 1} ${film} 
+           <div class="delete"></div>
+        </li>
+    `;
+});
